@@ -29,6 +29,11 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+    - name: Debug SSH setup
+      run: |
+        ls -al ~/.ssh
+        cat ~/.ssh/id_rsa | head -n 5
+
     - name: Deploy to local
       run: |
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
