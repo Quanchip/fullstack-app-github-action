@@ -22,11 +22,6 @@ jobs:
       working-directory: ./backend
       run: ./mvnw clean package -DskipTests
 
-    - name: Debug SSH setup
-      run: |
-        ls -al ~/.ssh
-        cat ~/.ssh/id_rsa | head -n 5
-
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
@@ -37,7 +32,7 @@ jobs:
     - name: Deploy to local
       run: |
         ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-          cd /home/quanchip/aws-cicd-test-app/React-Springboot-App
+          cd /home/quanchip/aws-cicd-test-app1/React-Springboot-App
           docker-compose down
           docker-compose up -d --build
         EOF
